@@ -45,43 +45,32 @@ limitations under the License.
 
 <!-- Package usage documentation. -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/complex-float64-real
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-real = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/complex-float64-real@umd/browser.js' )
-```
-The previous example will load the latest bundled code from the umd branch. Alternatively, you may load a specific version by loading the file from one of the [tagged bundles](https://github.com/stdlib-js/complex-float64-real/tags). For example,
-
-```javascript
-real = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/complex-float64-real@v0.1.1-umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var real = require( 'path/to/vendor/umd/complex-float64-real/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/complex-float64-real@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.real;
-})();
-</script>
+var real = require( '@stdlib/complex-float64-real' );
 ```
 
 #### real( z )
@@ -118,16 +107,11 @@ var re = real( z );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/complex-float64-ctor@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-base-discrete-uniform@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-filled-by@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/complex-float64-real@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var Complex128 = require( '@stdlib/complex-float64-ctor' );
+var discreteUniform = require( '@stdlib/random-base-discrete-uniform' );
+var filledarrayBy = require( '@stdlib/array-filled-by' );
+var real = require( '@stdlib/complex-float64-real' );
 
 function random() {
     return new Complex128( discreteUniform( -10, 10 ), discreteUniform( -10, 10 ) ); // eslint-disable-line max-len
@@ -144,11 +128,6 @@ for ( i = 0; i < x.length; i++ ) {
     z = x.get( i );
     console.log( 'real(%s) = %d', z.toString(), real( z ) );
 }
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -157,7 +136,98 @@ for ( i = 0; i < x.length; i++ ) {
 
 <!-- C interface documentation. -->
 
+* * *
 
+<section class="c">
+
+## C APIs
+
+<!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
+
+<section class="intro">
+
+</section>
+
+<!-- /.intro -->
+
+<!-- C usage documentation. -->
+
+<section class="usage">
+
+### Usage
+
+```c
+#include "stdlib/complex/float64/real.h"
+```
+
+#### stdlib_complex128_real( z )
+
+Returns the real component of a double-precision complex floating-point number.
+
+```c
+#include "stdlib/complex/float64/ctor.h"
+
+stdlib_complex128_t z = stdlib_complex128( 5.0, 2.0 );
+
+// ...
+
+double re = stdlib_complex128_real( z );
+// returns 5.0
+```
+
+The function accepts the following arguments:
+
+-   **z**: `[in] stdlib_complex128_t` double-precision complex floating-point number.
+
+```c
+double stdlib_complex128_real( const stdlib_complex128_t z );
+```
+
+</section>
+
+<!-- /.usage -->
+
+<!-- C API usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
+
+<section class="notes">
+
+</section>
+
+<!-- /.notes -->
+
+<!-- C API usage examples. -->
+
+<section class="examples">
+
+### Examples
+
+```c
+#include "stdlib/complex/float64/real.h"
+#include "stdlib/complex/float64/ctor.h"
+#include <stdio.h>
+
+int main( void ) {
+    const stdlib_complex128_t x[] = {
+        stdlib_complex128( 5.0, 2.0 ),
+        stdlib_complex128( -2.0, 1.0 ),
+        stdlib_complex128( 0.0, -0.0 ),
+        stdlib_complex128( 0.0/0.0, 0.0/0.0 )
+    };
+
+    int i;
+    for ( i = 0; i < 4; i++ ) {
+        printf( "real(v) = %lf\n", stdlib_complex128_real( x[ i ] ) );
+    }
+}
+```
+
+</section>
+
+<!-- /.examples -->
+
+</section>
+
+<!-- /.c -->
 
 <!-- Section to include cited references. If references are included, add a horizontal rule *before* the section. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
 
@@ -221,8 +291,8 @@ Copyright &copy; 2016-2024. The Stdlib [Authors][stdlib-authors].
 [npm-image]: http://img.shields.io/npm/v/@stdlib/complex-float64-real.svg
 [npm-url]: https://npmjs.org/package/@stdlib/complex-float64-real
 
-[test-image]: https://github.com/stdlib-js/complex-float64-real/actions/workflows/test.yml/badge.svg?branch=v0.1.1
-[test-url]: https://github.com/stdlib-js/complex-float64-real/actions/workflows/test.yml?query=branch:v0.1.1
+[test-image]: https://github.com/stdlib-js/complex-float64-real/actions/workflows/test.yml/badge.svg?branch=main
+[test-url]: https://github.com/stdlib-js/complex-float64-real/actions/workflows/test.yml?query=branch:main
 
 [coverage-image]: https://img.shields.io/codecov/c/github/stdlib-js/complex-float64-real/main.svg
 [coverage-url]: https://codecov.io/github/stdlib-js/complex-float64-real?branch=main
@@ -256,9 +326,9 @@ Copyright &copy; 2016-2024. The Stdlib [Authors][stdlib-authors].
 
 <!-- <related-links> -->
 
-[@stdlib/complex/float64/imag]: https://github.com/stdlib-js/complex-float64-imag/tree/umd
+[@stdlib/complex/float64/imag]: https://github.com/stdlib-js/complex-float64-imag
 
-[@stdlib/complex/float64/reim]: https://github.com/stdlib-js/complex-float64-reim/tree/umd
+[@stdlib/complex/float64/reim]: https://github.com/stdlib-js/complex-float64-reim
 
 <!-- </related-links> -->
 
